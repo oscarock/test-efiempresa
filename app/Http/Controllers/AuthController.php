@@ -9,27 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Validation\ValidationException;
 
+
 class AuthController extends Controller
 {
-    protected function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-         // Hash del password
-        $hashedPassword = Hash::make($request->input('password'));
-
-        $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => $hashedPassword,
-        ]);
-
-        return response()->json(['message' => 'Usuario creado..', 'user' => $user], 201);
-    }
 
     public function authenticate(Request $request)
 	{
